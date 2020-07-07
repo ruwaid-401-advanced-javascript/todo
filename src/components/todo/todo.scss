@@ -19,7 +19,7 @@ main {
     justify-content: left;
     color: white;
     width: 80%;
-    margin-top:15px ;
+    margin-top: 15px;
   }
 }
 .todo-details {
@@ -99,4 +99,10 @@ main {
       }
     }
   }
+}
+
+.show {
+  position: absolute;
+  z-index: 9999;
+  right: 0;
 }
