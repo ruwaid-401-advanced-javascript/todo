@@ -1,36 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form, Card } from 'react-bootstrap';
+
+
+import useForm from '../hooks/form.js'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const TodoForm = (props) => {
 
-  const [item, setItem] = useState({});
+  const [handleSubmit, handleInputChange] = useForm(addCallback);
 
-  const _handleInputChange = e => {
-    setItem({ ...item, [e.target.name]: e.target.value })
-  };
-
-  const _handleSubmit = e => {
-    e.preventDefault();
-    e.target.reset();
-    props.handleSubmit(item);
-  };
+  function addCallback(itm) {
+    props.handleSubmit(itm);
+  }
 
   return (
     <>
-      <Form onSubmit={_handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Card style={{ width: '18rem' }}>
-        <h3>Add TO DO Item</h3>
+          <h3>Add TO DO Item</h3>
           <Card.Body>
             <Card.Title>Your Info</Card.Title>
             <Form.Group controlId="formBasicRange">
               <Form.Label>To Do Item</Form.Label>
-              <Form.Control name="text" placeholder="Add To Do List Item" onChange={_handleInputChange} />
+              <Form.Control name="text" placeholder="Add To Do List Item" onChange={handleInputChange} />
               <Form.Label>Difficulty Rating</Form.Label>
-              <Form.Control defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={_handleInputChange} />
+              <Form.Control defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange} />
               <Form.Label>Assigned To</Form.Label>
-              <Form.Control type="text" name="assignee" placeholder="Assigned To" onChange={_handleInputChange} />
+              <Form.Control type="text" name="assignee" placeholder="Assigned To" onChange={handleInputChange} />
             </Form.Group>
             <Button variant="primary" type="submit">Submit Form</Button>
           </Card.Body>

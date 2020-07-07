@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 import './todo.scss';
+import useAjax from '../hooks/ajax.js';
 
 function ToDo(props) {
 
   const [list, setList] = useState([]);
+  const [getElement, postElement, putElement, deleteElement] = useAjax(setList);
 
   const addItem = (item) => {
-    item._id = Math.random();
     item.complete = false;
-    setList([...list, item])
+    let url = `https://lab32-401.herokuapp.com/todo`
+    postElement(url, item);
   };
 
   const toggleComplete = id => {
@@ -21,28 +23,37 @@ function ToDo(props) {
       item.complete = !item.complete;
       let z = list.map(listItem => listItem._id === item._id ? item : listItem);
       setList([...z])
+
+
+      let data = item;
+      let url = `https://lab32-401.herokuapp.com/todo`
+
+
+      putElement(url, data)
     }
   };
 
   useEffect(() => {
-    
-   document.title = `TO DO LIST ${list.filter(item => !item.complete).length}`
-
+    document.title = `TO DO LIST ${list.filter(item => !item.complete).length}`
   }, [list]);
 
 
   useEffect(() => {
-    
-    let list = [
-      { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A' },
-      { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A' },
-      { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B' },
-      { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C' },
-      { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B' },
-    ];
-    setList( [...list] );
+    let url = `https://lab32-401.herokuapp.com/todo`
 
-  }, []);
+    getElement(url);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [list]);
+
+
+  const togglehandleDelete = id => {
+    let idx = list.findIndex(i => i._id === id);
+    list.splice(idx, 1);
+    setList([...list])
+    let url = `https://lab32-401.herokuapp.com/todo`
+
+    deleteElement(url, id)
+  }
 
   return (
     <main>
@@ -60,6 +71,7 @@ function ToDo(props) {
           <TodoList
             list={list}
             handleComplete={toggleComplete}
+            handleDelete={togglehandleDelete}
           />
         </div>
       </section>

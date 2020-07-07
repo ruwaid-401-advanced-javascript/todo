@@ -73,14 +73,14 @@ main {
         }
       }
 
-      span {
-        background: rgb(252, 108, 108);
-        // padding: 50px;
-        cursor: pointer;
-        &:hover {
-          background: pink;
-        }
-      }
+      // span {
+      //   background: rgb(252, 108, 108);
+      //   // padding: 50px;
+      //   cursor: pointer;
+      //   &:hover {
+      //     background: pink;
+      //   }
+      // }
       span,
       input {
         border: 0.5px solid #eee;

@@ -1,13 +1,13 @@
-# LAB - Class 31
+# LAB - Class 32
 
-## Project: Hooks API
+## Project: Custom Hooks
 
 ### Author: Ruwaid al sayyed obeid
 
 ### Links and Resources
 
-- [submission PR](https://github.com/ruwaid-401-advanced-javascript/todo/pull/1)
-- [Github actions](https://github.com/ruwaid-401-advanced-javascript/resty/pull/1/checks)
+- [submission PR](https://github.com/ruwaid-401-advanced-javascript/todo/pull/2)
+- [Github actions](https://github.com/ruwaid-401-advanced-javascript/resty/pull/2/checks)
 
 
 ## Modules
