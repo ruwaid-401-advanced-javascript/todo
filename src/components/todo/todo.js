@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
@@ -70,20 +71,20 @@ function ToDo(props) {
 
         <div>
           <form onChange={e => siteContext.changeSort(e.target.value)}>
-            <label class="radio">
+            <label >
               <input type="radio" name="sort" value='difficulty' />
             difficulty
               </label>
-            <label class="radio">
+            <label >
               <input type="radio" name="sort" value='complete' />
             complete
           </label>
-          <label class="radio">
+          <label >
               <input type="radio" name="sort" value='assignee' />
             assignee
           </label>
-          <label class="radio">
-              <input type="radio" name="sort" value='none' />
+          <label >
+              <input  type="radio" name="sort" value='none' />
             none
           </label>
           </form>
