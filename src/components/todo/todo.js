@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 import useAjax from '../hooks/ajax.js';
+import Auth from '../auth/auth.js';
 
 import './todo.scss';
 
@@ -16,7 +17,7 @@ function ToDo(props) {
 
   const addItem = (item) => {
     item.complete = false;
-    let url = `https://lab32-401.herokuapp.com/todo`
+    let url = process.env.API_URL ||`https://lab32-401.herokuapp.com/todo`
     postElement(url, item);
   };
 
@@ -27,14 +28,11 @@ function ToDo(props) {
     if (item._id) {
       item.complete = !item.complete;
       let z = list.map(listItem => listItem._id === item._id ? item : listItem);
-      setList([...z])
-
-
+      
       let data = item;
       let url = `https://lab32-401.herokuapp.com/todo`
-
-
       putElement(url, data)
+      setList([...z])
     }
   };
 
@@ -53,10 +51,9 @@ function ToDo(props) {
   const togglehandleDelete = id => {
     let idx = list.findIndex(i => i._id === id);
     list.splice(idx, 1);
-    setList([...list])
     let url = `https://lab32-401.herokuapp.com/todo`
-
     deleteElement(url, id)
+    setList([...list])
   }
 
   return (
@@ -65,7 +62,7 @@ function ToDo(props) {
         <h2>TO DO LIST Manager ({list.filter(item => !item.complete).length}) </h2>
       </header>
       <button className='show' onClick={e => siteContext.setShow(!siteContext.show)}>
-          complete/pending
+        complete/pending
       </button>
       <section className="todo">
 
@@ -79,21 +76,22 @@ function ToDo(props) {
               <input type="radio" name="sort" value='complete' />
             complete
           </label>
-          <label >
+            <label >
               <input type="radio" name="sort" value='assignee' />
             assignee
           </label>
-          <label >
-              <input  type="radio" name="sort" value='none' />
+            <label >
+              <input type="radio" name="sort" value='none' />
             none
           </label>
           </form>
 
         </div>
-        <div>
-          <TodoForm handleSubmit={addItem} />
-        </div>
-
+        <Auth capability="update">
+          <div>
+            <TodoForm handleSubmit={addItem} />
+          </div>
+        </Auth>
         <div>
           <TodoList
             list={list}

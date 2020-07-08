@@ -1,13 +1,13 @@
-# LAB - Class 32
+# LAB - Class 34
 
-## Project: Custom Hooks
+## Project: LAB - <Login /> and <Auth />
 
 ### Author: Ruwaid al sayyed obeid
 
 ### Links and Resources
 
-- [submission PR](https://github.com/ruwaid-401-advanced-javascript/todo/pull/2)
-- [Github actions](https://github.com/ruwaid-401-advanced-javascript/resty/pull/2/checks)
+- [submission PR](https://github.com/ruwaid-401-advanced-javascript/todo/pull/4)
+- [Github actions](https://github.com/ruwaid-401-advanced-javascript/resty/pull/4/checks)
 
 
 ## Modules
