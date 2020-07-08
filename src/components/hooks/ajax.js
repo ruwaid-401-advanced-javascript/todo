@@ -6,8 +6,6 @@ const useAjax = (callback) => {
   const getElement = url => {
     axios.get(url)
       .then(res => {
-        console.log(res);
-        
         callback([...res.data]);
       })
   };
