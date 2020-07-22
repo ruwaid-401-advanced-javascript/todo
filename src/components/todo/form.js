@@ -1,18 +1,12 @@
 import React from 'react';
 import { Button, Form, Card } from 'react-bootstrap';
 
-
 import useForm from '../hooks/form.js'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const TodoForm = (props) => {
 
-  const [handleSubmit, handleInputChange] = useForm(addCallback);
-
-  function addCallback(itm) {
-    props.handleSubmit(itm);
-  }
+  const [handleSubmit, handleInputChange] = useForm(props.handleSubmit);
 
   return (
     <>

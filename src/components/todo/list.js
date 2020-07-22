@@ -1,17 +1,21 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useContext } from 'react';
-
 import { Card } from 'react-bootstrap';
+
+import { SettingsContext } from '../../context/site.js';
+import {LoginContext} from '../../context/loginContext.js';
+import Auth from '../auth/auth.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './list.scss'
-import { SettingsContext } from '../../context/site.js';
+
 var arr;
 
 function TodoList(props) {
 
 
   const siteContext = useContext(SettingsContext);
+  const loginContext = useContext(LoginContext);
 
   const [buttonIdx, setbuttonIdx] = useState(0);
 
@@ -52,13 +56,21 @@ function TodoList(props) {
               key={item._id}
             >
               <Card style={{ width: '18rem', padding: '5px' }} >
-                <p onClick={() => props.handleDelete(item._id)} className='btnDelete'>X</p>
+               
+                <Auth capability="delete">
+                  <p onClick={() => props.handleDelete(item._id)} className='btnDelete'>X</p>
+                </Auth>
+
                 <Card.Title className='card-title'>
-                  <p className={`status status-${item.complete.toString()}`} onClick={() => props.handleComplete(item._id)}>
+                  <p className={`status status-${item.complete.toString()}`}
+                    onClick={loginContext.user.capabilities.includes('update') ?
+                      () => props.handleComplete(item._id): null }
+                    >
                     {`${item.complete ? 'complete' : 'pending'}`}
                   </p>
                   {item.assignee}
                 </Card.Title>
+
                 <Card.Body >
                   {item.text}
                   <div className="diff">Difficulty: {item.difficulty}</div>
